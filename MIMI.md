@@ -1,7 +1,3 @@
-# MIMI
-
-- TODO
-
 # GALLEON
 
 - Iron Farm
@@ -19,9 +15,3 @@
 - Industrial Area
 
 - Movement system (Vertical, Horizontal, Rotational)
-
-# RAILROADS
-
-- kapecc_5 -> Old Port
-
-
