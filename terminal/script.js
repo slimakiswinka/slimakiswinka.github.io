@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Function to process the entered command
+
     function processCommand(command) {
         const outputLine = document.createElement("div");
         outputLine.textContent = `$ ${command}`;
         terminalOutput.appendChild(outputLine);
         
-        // Handle different commands
+
         switch (command.toLowerCase()) {
             case "help":
                 displayResponse("Available commands: help, about, ip, clear");
