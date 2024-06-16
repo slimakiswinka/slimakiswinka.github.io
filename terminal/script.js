@@ -32,10 +32,6 @@ document.addEventListener("DOMContentLoaded", function() {
             case "clear":
                 clearTerminal();
                 break;
-            case "echo":
-                const echoMessage = command.substring(5);
-                displayResponse(echoMessage);
-                break;
             default:
                 displayResponse(`${command}: command not found`);
         }
