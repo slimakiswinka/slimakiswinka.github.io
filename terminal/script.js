@@ -12,27 +12,54 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    // Function to process the entered command
     function processCommand(command) {
         const outputLine = document.createElement("div");
         outputLine.textContent = `$ ${command}`;
         terminalOutput.appendChild(outputLine);
         
-        const response = document.createElement("div");
-        response.classList.add("response");
+        // Handle different commands
         switch (command.toLowerCase()) {
             case "help":
-                response.textContent = "Available commands: help, about, clear";
+                displayResponse("Available commands: help, about, ip, clear");
                 break;
             case "about":
-                response.textContent = "This is a wierd linux-like terminal.";
+                displayResponse("This is a wierd linux-like terminal.");
+                break;
+            case "ip":
+                fetchIPAddress();
                 break;
             case "clear":
-                terminalOutput.innerHTML = "";
-                return;
+                clearTerminal();
+                break;
             default:
-                response.textContent = `${command}: command not found`;
+                displayResponse(`${command}: command not found`);
         }
+    }
+
+
+    function fetchIPAddress() {
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                displayResponse(`Your public IP address is: ${data.ip}`);
+            })
+            .catch(error => {
+                displayResponse(`Error fetching IP address: ${error}`);
+            });
+    }
+
+
+    function displayResponse(message) {
+        const response = document.createElement("div");
+        response.classList.add("response");
+        response.textContent = message;
         terminalOutput.appendChild(response);
         terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }
+
+
+    function clearTerminal() {
+        terminalOutput.innerHTML = "";
     }
 });
