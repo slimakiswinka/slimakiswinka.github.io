@@ -5,8 +5,9 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
+			const name = data.name || data.login;
             document.getElementById("profile-picture").src = data.avatar_url;
-            document.getElementById("profile-name").innerText = data.name || data.login;
+            document.getElementById("profile-name").innerText = `Hey there, I'm ${name}!`;
         })
         .catch(error => console.error('Error fetching GitHub profile:', error));
 });
