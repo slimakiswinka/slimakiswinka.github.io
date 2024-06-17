@@ -47,6 +47,9 @@ document.addEventListener("DOMContentLoaded", function() {
             case "random":
                 displayResponse(Math.floor(Math.random() * 100) + 1);
                 break;
+            case "sys":
+                displaySystemInfo();
+                break;
             default:
                 displayResponse(`${command}: command not found. Use "help" to see all available commands.`);
         }
@@ -54,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function displayHelp(args) {
         if (args.length === 0) {
-            displayResponse("Available commands: help, about, ip, clear, calc, time, echo, reverse, random");
+            displayResponse("Available commands: help, about, ip, clear, calc, time, echo, reverse, random, sys");
         } else {
             const subcommand = args[0].toLowerCase();
             switch (subcommand) {
@@ -84,6 +87,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     break;
                 case "random":
                     displayResponse("random: Generates a random number between 1 and 100.");
+                    break;
+                case "sys":
+                    displayResponse("sys: Displays the user's browser and operating system information.");
                     break;
                 default:
                     displayResponse(`No detailed help available for command: ${subcommand}`);
@@ -116,7 +122,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function calculate(expression) {
         try {
+            // Validate and sanitize the input expression
             if (/^[0-9+\-*/().\s]+$/.test(expression)) {
+                // Perform the calculation
                 const result = Function('"use strict"; return (' + expression + ')')();
                 displayResponse(`Result: ${result}`);
             } else {
@@ -133,5 +141,53 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function reverse(text) {
         displayResponse(text.split("").reverse().join(""));
+    }
+
+    function displaySystemInfo() {
+        const browser = getBrowserInfo();
+        const os = getOSInfo();
+        displayResponse(`Browser: ${browser}, OS: ${os}`);
+    }
+
+    function getBrowserInfo() {
+        const userAgent = navigator.userAgent;
+        let browser = "Unknown browser";
+
+        if (userAgent.indexOf("Firefox") > -1) {
+            browser = "Mozilla Firefox";
+        } else if (userAgent.indexOf("SamsungBrowser") > -1) {
+            browser = "Samsung Internet";
+        } else if (userAgent.indexOf("Opera") > -1 || userAgent.indexOf("OPR") > -1) {
+            browser = "Opera";
+        } else if (userAgent.indexOf("Trident") > -1) {
+            browser = "Internet Explorer";
+        } else if (userAgent.indexOf("Edge") > -1) {
+            browser = "Microsoft Edge";
+        } else if (userAgent.indexOf("Chrome") > -1) {
+            browser = "Google Chrome";
+        } else if (userAgent.indexOf("Safari") > -1) {
+            browser = "Apple Safari";
+        }
+
+        return browser;
+    }
+
+    function getOSInfo() {
+        const userAgent = navigator.userAgent;
+        let os = "Unknown OS";
+
+        if (userAgent.indexOf("Win") > -1) {
+            os = "Windows";
+        } else if (userAgent.indexOf("Mac") > -1) {
+            os = "Macintosh";
+        } else if (userAgent.indexOf("Linux") > -1) {
+            os = "Linux";
+        } else if (userAgent.indexOf("Android") > -1) {
+            os = "Android";
+        } else if (userAgent.indexOf("like Mac") > -1) {
+            os = "iOS";
+        }
+
+        return os;
     }
 });
