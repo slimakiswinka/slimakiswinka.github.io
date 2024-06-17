@@ -116,8 +116,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function calculate(expression) {
         try {
-            const result = eval(expression);
-            if (!isNaN(result)) {
+            if (/^[0-9+\-*/().\s]+$/.test(expression)) {
+                const result = Function('"use strict"; return (' + expression + ')')();
                 displayResponse(`Result: ${result}`);
             } else {
                 displayResponse(`Invalid calculation: ${expression}`);
