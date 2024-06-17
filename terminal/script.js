@@ -12,19 +12,19 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-
     function processCommand(command) {
         const outputLine = document.createElement("div");
         outputLine.textContent = `$ ${command}`;
         terminalOutput.appendChild(outputLine);
-        
 
-        switch (command.toLowerCase()) {
+        const [cmd, ...args] = command.split(" ");
+
+        switch (cmd.toLowerCase()) {
             case "help":
-                displayResponse("Available commands: help, about, ip, clear");
+                displayResponse("Available commands: help, about, ip, clear, calc");
                 break;
             case "about":
-                displayResponse("This is a wierd linux-like terminal.");
+                displayResponse("This is a weird linux-like terminal.");
                 break;
             case "ip":
                 fetchIPAddress();
@@ -32,11 +32,13 @@ document.addEventListener("DOMContentLoaded", function() {
             case "clear":
                 clearTerminal();
                 break;
+            case "calc":
+                calculate(args.join(" "));
+                break;
             default:
                 displayResponse(`${command}: command not found`);
         }
     }
-
 
     function fetchIPAddress() {
         fetch('https://api.ipify.org?format=json')
@@ -49,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function() {
             });
     }
 
-
     function displayResponse(message) {
         const response = document.createElement("div");
         response.classList.add("response");
@@ -58,8 +59,20 @@ document.addEventListener("DOMContentLoaded", function() {
         terminalOutput.scrollTop = terminalOutput.scrollHeight;
     }
 
-
     function clearTerminal() {
         terminalOutput.innerHTML = "";
+    }
+
+    function calculate(expression) {
+        try {
+            const result = eval(expression);
+            if (!isNaN(result)) {
+                displayResponse(`Result: ${result}`);
+            } else {
+                displayResponse(`Invalid calculation: ${expression}`);
+            }
+        } catch (error) {
+            displayResponse(`Error in calculation: ${error.message}`);
+        }
     }
 });
