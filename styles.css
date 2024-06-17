@@ -85,6 +85,13 @@ a:hover {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
+.scrollable-container {
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 20px; /* Optional padding */
+    box-sizing: border-box; /* Include padding in the height calculation */
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
