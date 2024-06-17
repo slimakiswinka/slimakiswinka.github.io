@@ -26,6 +26,9 @@ document.addEventListener("DOMContentLoaded", function() {
             case "about":
                 displayResponse("This is a weird linux-like terminal.");
                 break;
+			case "time":
+				displayResponse(new Date().toLocaleString());
+				break;
             case "ip":
                 fetchIPAddress();
                 break;
@@ -42,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function displayHelp(args) {
         if (args.length === 0) {
-            displayResponse("Available commands: help, about, ip, clear, calc");
+            displayResponse("Available commands: help, about, ip, clear, calc, time");
         } else {
             const subcommand = args[0].toLowerCase();
             switch (subcommand) {
@@ -57,6 +60,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     break;
                 case "clear":
                     displayResponse("clear: Clears the terminal screen.");
+                    break;
+                case "time":
+                    displayResponse("time: Displays date and time.");
                     break;
                 case "calc":
                     displayResponse("calc [expression]: Evaluates a mathematical expression and displays the result.");
