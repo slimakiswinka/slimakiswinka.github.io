@@ -10,7 +10,13 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden;
+}
+
+.scrollable-container {
+    overflow-y: auto; 
+    max-height: 100vh;
+    padding: 20px; 
+    box-sizing: border-box; 
 }
 
 .container {
@@ -83,13 +89,6 @@ a:hover {
 .project:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-.scrollable-container {
-    height: 100vh; /* Full viewport height */
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding: 20px; /* Optional padding */
-    box-sizing: border-box; /* Include padding in the height calculation */
 }
 
 @keyframes fadeIn {
