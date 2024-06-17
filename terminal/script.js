@@ -163,6 +163,8 @@ document.addEventListener("DOMContentLoaded", function() {
             browser = "Internet Explorer";
         } else if (userAgent.indexOf("Edge") > -1) {
             browser = "Microsoft Edge";
+        } else if (userAgent.indexOf("Edg") > -1) {
+            browser = "Microsoft Edge";
         } else if (userAgent.indexOf("Chrome") > -1) {
             browser = "Google Chrome";
         } else if (userAgent.indexOf("Safari") > -1) {
