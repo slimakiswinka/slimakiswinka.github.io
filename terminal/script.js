@@ -26,9 +26,9 @@ document.addEventListener("DOMContentLoaded", function() {
             case "about":
                 displayResponse("This is a weird linux-like terminal.");
                 break;
-			case "time":
-				displayResponse(new Date().toLocaleString());
-				break;
+            case "time":
+                displayResponse(new Date().toLocaleString());
+                break;
             case "ip":
                 fetchIPAddress();
                 break;
@@ -38,14 +38,23 @@ document.addEventListener("DOMContentLoaded", function() {
             case "calc":
                 calculate(args.join(" "));
                 break;
+            case "echo":
+                echo(args.join(" "));
+                break;
+            case "reverse":
+                reverse(args.join(" "));
+                break;
+            case "random":
+                displayResponse(Math.floor(Math.random() * 100) + 1);
+                break;
             default:
-                displayResponse(`${command}: command not found. Use "help" to see all avaliable commands.`);
+                displayResponse(`${command}: command not found. Use "help" to see all available commands.`);
         }
     }
 
     function displayHelp(args) {
         if (args.length === 0) {
-            displayResponse("Available commands: help, about, ip, clear, calc, time");
+            displayResponse("Available commands: help, about, ip, clear, calc, time, echo, reverse, random");
         } else {
             const subcommand = args[0].toLowerCase();
             switch (subcommand) {
@@ -66,6 +75,15 @@ document.addEventListener("DOMContentLoaded", function() {
                     break;
                 case "calc":
                     displayResponse("calc [expression]: Evaluates a mathematical expression and displays the result.");
+                    break;
+                case "echo":
+                    displayResponse("echo [text]: Repeats the input text.");
+                    break;
+                case "reverse":
+                    displayResponse("reverse [text]: Reverses the input text.");
+                    break;
+                case "random":
+                    displayResponse("random: Generates a random number between 1 and 100.");
                     break;
                 default:
                     displayResponse(`No detailed help available for command: ${subcommand}`);
@@ -107,5 +125,13 @@ document.addEventListener("DOMContentLoaded", function() {
         } catch (error) {
             displayResponse(`Error in calculation: ${error.message}`);
         }
+    }
+
+    function echo(text) {
+        displayResponse(text);
+    }
+
+    function reverse(text) {
+        displayResponse(text.split("").reverse().join(""));
     }
 });
