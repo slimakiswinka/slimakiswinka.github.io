@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         switch (cmd.toLowerCase()) {
             case "help":
-                displayResponse("Available commands: help, about, ip, clear, calc");
+                displayHelp(args);
                 break;
             case "about":
                 displayResponse("This is a weird linux-like terminal.");
@@ -36,7 +36,34 @@ document.addEventListener("DOMContentLoaded", function() {
                 calculate(args.join(" "));
                 break;
             default:
-                displayResponse(`${command}: command not found`);
+                displayResponse(`${command}: command not found. Use "help" to see all avaliable commands.`);
+        }
+    }
+
+    function displayHelp(args) {
+        if (args.length === 0) {
+            displayResponse("Available commands: help, about, ip, clear, calc");
+        } else {
+            const subcommand = args[0].toLowerCase();
+            switch (subcommand) {
+                case "help":
+                    displayResponse("help: Provides information about available commands or detailed information about a specific command.");
+                    break;
+                case "about":
+                    displayResponse("about: Provides information about the terminal.");
+                    break;
+                case "ip":
+                    displayResponse("ip: Fetches and displays your public IP address.");
+                    break;
+                case "clear":
+                    displayResponse("clear: Clears the terminal screen.");
+                    break;
+                case "calc":
+                    displayResponse("calc [expression]: Evaluates a mathematical expression and displays the result.");
+                    break;
+                default:
+                    displayResponse(`No detailed help available for command: ${subcommand}`);
+            }
         }
     }
 
